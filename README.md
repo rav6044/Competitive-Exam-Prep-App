@@ -23,3 +23,5 @@ npm run dev
 cd frontend
 npm install
 npm run dev
+
+Live Link:- competitive-exam-prep-app.vercel.app
