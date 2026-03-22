@@ -9,10 +9,23 @@ import errorMiddleware from "./middleware/error.middleware.js";
 
 const app = express();
 
+const allowedOrigins = [
+  'https://competitive-exam-prep-app.vercel.app',
+  'https://competitive-exam-prep-app-git-main-rav6044s-projects.vercel.app',
+  'http://localhost:5173'
+];
+
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
 }));
+
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
